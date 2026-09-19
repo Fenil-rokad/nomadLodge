@@ -1,0 +1,21 @@
+{
+  "name": "nomadLodge",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "keywords": [],
+  "author": "Fenil Rokad",
+  "license": "ISC",
+  "description": "A Smaller version of airbnb",
+  "dependencies": {
+    "dotenv": "^18.0.0",
+    "ejs": "^6.0.1",
+    "express": "^5.2.1",
+    "mongoose": "^9.10.1"
+  },
+  "type": "module"
+}
