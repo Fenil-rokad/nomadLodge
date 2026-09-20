@@ -38,6 +38,19 @@ async function Main() {
       res.render("listings/allListings", { allListings });
     });
 
+    //new listing form
+    app.get("/listings/new", (req, res) => {
+      res.render("listings/new");
+    });
+
+    //create route
+    app.post("/listings", async (req, res) => {
+      const listing = req.body;
+      const newListing = await Listing.create(listing);
+      console.log(newListing);
+      res.redirect("/listings");
+    })
+
     //show route
     app.get("/listings/:id", async (req, res) => {
       const id = req.params.id;
