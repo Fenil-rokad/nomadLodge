@@ -17,32 +17,46 @@ const __dirname = path.dirname(__filename);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-async function Main(){
-    try{
-        //Establishing a connection
-        await mongoose.connect(process.env.MONGO_URL);
-        console.log(`DataBase connected Succesfully......`);
+app.use(express.urlencoded({ extended: true }));
 
-        //root path
-        app.get("/", (req, res) => {
-            res.send("<h1>Welcome to Our page...</h1>")
-        });
+async function Main() {
+  try {
+    //Establishing a connection
+    await mongoose.connect(process.env.MONGO_URL);
+    console.log(`DataBase connected Succesfully......`);
 
-        //show all listings
-        app.get("/listings", async (req, res) => {
-            const allListings = await Listing.find();
+    //root path
+    app.get("/", (req, res) => {
+      res.send("<h1>Welcome to Our page...</h1>");
+    });
 
-            // console.log(allListings);
-            res.render("allListings", {allListings});
-        });
+    //show all listings
+    app.get("/listings", async (req, res) => {
+      const allListings = await Listing.find();
 
-    }catch(err){
-        console.error(`There is an error: ${err}`);
-    }
+      // console.log(allListings);
+      res.render("listings/allListings", { allListings });
+    });
+
+    //show route
+    app.get("/listings/:id", async (req, res) => {
+      const id = req.params.id;
+      const listing = await Listing.findById(id);
+      const price = listing.price.toLocaleString('en-IN', {
+        style: 'currency',
+        currency: 'INR',
+        maximumFractionDigits: 2
+      });
+      res.render("listings/show", { listing, price });
+    });
+    
+  } catch (err) {
+    console.error(`There is an error: ${err}`);
+  }
 }
 
 Main();
 
 app.listen(port, () => {
-    console.log(`App is listening on port localhost:${port}`);
-})
+  console.log(`App is listening on port localhost:${port}`);
+});
