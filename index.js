@@ -84,6 +84,7 @@ async function Main() {
       res.redirect(`/listings/${id}`);
     });
 
+    //delete route
     app.delete("/listings/:id", async (req, res) => {
       const id = req.params.id;
       const deletedListing = await Listing.findByIdAndDelete(id);
