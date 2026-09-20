@@ -83,6 +83,14 @@ async function Main() {
       console.log(updatedListing);
       res.redirect(`/listings/${id}`);
     });
+
+    app.delete("/listings/:id", async (req, res) => {
+      const id = req.params.id;
+      const deletedListing = await Listing.findByIdAndDelete(id);
+      console.log(deletedListing);  
+      res.redirect(`/listings`);
+    });
+
   } catch (err) {
     console.error(`There is an error: ${err}`);
   }
