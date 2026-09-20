@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import { Listing } from "./models/listing.js";
 import path from "path";
 import { fileURLToPath } from "url";
+import methodOverride from "method-override";
 
 dotenv.config();
 
@@ -18,6 +19,8 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 app.use(express.urlencoded({ extended: true }));
+
+app.use(methodOverride("_method"));
 
 async function Main() {
   try {
@@ -49,20 +52,37 @@ async function Main() {
       const newListing = await Listing.create(listing);
       console.log(newListing);
       res.redirect("/listings");
-    })
+    });
 
     //show route
     app.get("/listings/:id", async (req, res) => {
       const id = req.params.id;
       const listing = await Listing.findById(id);
-      const price = listing.price.toLocaleString('en-IN', {
-        style: 'currency',
-        currency: 'INR',
-        maximumFractionDigits: 2
+      const price = listing.price.toLocaleString("en-IN", {
+        style: "currency",
+        currency: "INR",
+        maximumFractionDigits: 2,
       });
       res.render("listings/show", { listing, price });
     });
-    
+
+    //edit form route
+    app.get("/listings/:id/edit", async (req, res) => {
+      const id = req.params.id;
+      const listing = await Listing.findById(id);
+      res.render(`listings/edit`, { listing });
+    });
+
+    //update route
+    app.put("/listings/:id", async (req, res) => {
+      const id = req.params.id;
+      const listing = req.body;
+      const updatedListing = await Listing.findByIdAndUpdate(id, listing, {
+        new: true,
+      });
+      console.log(updatedListing);
+      res.redirect(`/listings/${id}`);
+    });
   } catch (err) {
     console.error(`There is an error: ${err}`);
   }
