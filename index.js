@@ -35,7 +35,7 @@ async function Main() {
 
     //root path
     app.get("/", (req, res) => {
-      res.send("<h1>Welcome to Our page...</h1>");
+      res.render(`home/home`);
     });
 
     //show all listings
