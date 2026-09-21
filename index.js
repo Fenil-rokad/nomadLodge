@@ -5,6 +5,7 @@ import { Listing } from "./models/listing.js";
 import path from "path";
 import { fileURLToPath } from "url";
 import methodOverride from "method-override";
+import ejsMate from "ejs-mate";
 
 dotenv.config();
 
@@ -18,9 +19,13 @@ const __dirname = path.dirname(__filename);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
+app.use(express.static(path.join(__dirname, "public")));
+
 app.use(express.urlencoded({ extended: true }));
 
 app.use(methodOverride("_method"));
+
+app.engine('ejs', ejsMate);
 
 async function Main() {
   try {
@@ -38,7 +43,7 @@ async function Main() {
       const allListings = await Listing.find();
 
       // console.log(allListings);
-      res.render("listings/allListings", { allListings });
+      res.render("listings/allListings", { allListings});
     });
 
     //new listing form
@@ -78,7 +83,7 @@ async function Main() {
       const id = req.params.id;
       const listing = req.body;
       const updatedListing = await Listing.findByIdAndUpdate(id, listing, {
-        new: true,
+        returnDocument: true,
       });
       console.log(updatedListing);
       res.redirect(`/listings/${id}`);
@@ -88,10 +93,9 @@ async function Main() {
     app.delete("/listings/:id", async (req, res) => {
       const id = req.params.id;
       const deletedListing = await Listing.findByIdAndDelete(id);
-      console.log(deletedListing);  
+      console.log(deletedListing);
       res.redirect(`/listings`);
     });
-
   } catch (err) {
     console.error(`There is an error: ${err}`);
   }
