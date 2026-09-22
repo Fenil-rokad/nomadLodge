@@ -1,12 +1,46 @@
+    body{
+        display: flex;
+        flex-direction: column;
+        min-height: 100dvh; /* Dynamic viewport height handles mobile browsers perfectly */
+        margin: 0;
+    }
 
-.navbar{
+    .main-content{
+        flex: 1;
+    }
+
+    /* navbar */
+    .navbar {
     height: 5rem;
-}
+    }
 
-.fa-key{
+    .fa-key {
     color: rgb(96, 29, 73);
-}
+    }
 
-.nav-link{
+    .nav-link {
     color: rgb(189, 85, 121);
-}
+    }
+
+    /* footer */
+
+    
+
+    .footer {
+    display: flex;
+    justify-content: space-between;
+    }
+
+    .footer .left,
+    .right {
+    margin: 20px;
+    }
+
+    .left a {
+    text-decoration: none;
+    color: black;
+    }
+
+    .left a:hover {
+    text-decoration: underline;
+    }
