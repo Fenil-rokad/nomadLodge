@@ -1,46 +1,106 @@
-    body{
-        display: flex;
-        flex-direction: column;
-        min-height: 100dvh; /* Dynamic viewport height handles mobile browsers perfectly */
-        margin: 0;
-    }
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh; /* Dynamic viewport height handles mobile browsers perfectly */
+  margin: 0;
+}
 
-    .main-content{
-        flex: 1;
-    }
+.main-content {
+  flex: 1;
+}
 
-    /* navbar */
-    .navbar {
-    height: 5rem;
-    }
+/* home page */
 
-    .fa-key {
-    color: rgb(96, 29, 73);
-    }
+h1 {
+  font-family: "Josefin Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: bolder;
+  font-style: normal;
+}
 
-    .nav-link {
-    color: rgb(189, 85, 121);
-    }
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 79dvh;
+}
 
-    /* footer */
+/* navbar */
+.navbar {
+  height: 5rem;
+  font-family: "Josefin Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
 
-    
+.fa-key {
+  color: rgb(96, 29, 73);
+}
 
-    .footer {
-    display: flex;
-    justify-content: space-between;
-    }
+.nav-link {
+  color: rgb(189, 85, 121);
+}
 
-    .footer .left,
-    .right {
-    margin: 20px;
-    }
+/* footer */
 
-    .left a {
-    text-decoration: none;
-    color: black;
-    }
+.footer {
+  display: flex;
+  justify-content: space-between;
+  font-family: "Josefin Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
 
-    .left a:hover {
-    text-decoration: underline;
-    }
+.footer .left,
+.right {
+  margin: 20px;
+}
+
+.left a {
+  text-decoration: none;
+  color: black;
+}
+
+.left a:hover {
+  text-decoration: underline;
+}
+
+.fa-facebook,
+.fa-x-twitter,
+.fa-instagram {
+  margin-left: 10px;
+}
+
+/* cards */
+
+.card {
+  border: none !important;
+  width: 100% !important;
+  font-family: "Quicksand", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.card-body .btn {
+  background-color: rgb(189, 85, 121);
+  color: white;
+}
+
+.card-body .btn:hover {
+  border: 2px solid rgb(96, 29, 73);
+}
+
+.card img {
+  border-radius: 20px;
+  height: 20rem;
+}
+
+.card-link {
+  transition-duration: 0.5s;
+  transition-timing-function: ease-in;
+}
+
+.card-link:hover {
+  transform: scale(1.07);
+}

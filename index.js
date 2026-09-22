@@ -25,7 +25,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(methodOverride("_method"));
 
-app.engine('ejs', ejsMate);
+app.engine("ejs", ejsMate);
 
 async function Main() {
   try {
@@ -43,7 +43,7 @@ async function Main() {
       const allListings = await Listing.find();
 
       // console.log(allListings);
-      res.render("listings/allListings", { allListings});
+      res.render("listings/allListings", { allListings });
     });
 
     //new listing form
