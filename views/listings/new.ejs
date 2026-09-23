@@ -1,6 +1,6 @@
-<% layout(`layouts/boilerplate`) %>
+ <% layout(`layouts/boilerplate`) %>
 
-    <body>
+<!--    <body>
         <div class="container">
             <h1>Add your listing</h1>
             <form action="/listings" method="post">
@@ -25,4 +25,89 @@
                 <button type="submit">Add</button>
             </form>
         </div>
-    </body>
+    </body> -->
+
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+
+            <div class="card shadow-sm border-0">
+                <div class="card-body p-4">
+
+                    <h1 class="mb-4 text-center">Add Your Listing</h1>
+
+                    <form action="/listings" method="post">
+
+                        <!-- Title -->
+                        <div class="mb-3">
+                            <label for="title" class="form-label">
+                                Title 
+                            </label>
+                            <input type="text" class="form-control" id="title" name="title"
+                                placeholder="Type title here.." required>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="mb-3">
+                            <label for="description" class="form-label">
+                                Description
+                            </label>
+                            <textarea class="form-control" id="description" name="description" rows="4"
+                                placeholder="Add description..."></textarea>
+                        </div>
+
+                        <!-- Image -->
+                        <div class="mb-3">
+                            <label for="image" class="form-label">
+                                Image URL / Link
+                            </label>
+                            <input type="text" class="form-control" id="image" name="image"
+                                placeholder="https://example.com/image.jpg">
+                        </div>
+
+                        <!-- Price -->
+                        <div class="mb-3">
+                            <label for="price" class="form-label">
+                                Price
+                            </label>
+                            <div class="input-group">
+                                <span class="input-group-text">₹</span>
+                                <input type="number" class="form-control" id="price" name="price"
+                                    placeholder="Add amount.." required>
+                            </div>
+                        </div>
+
+                        <!-- Location -->
+                        <div class="mb-3">
+                            <label for="location" class="form-label">
+                                Location
+                            </label>
+                            <input type="text" class="form-control" id="location" name="location"
+                                placeholder="Add location">
+                        </div>
+
+                        <!-- Country -->
+                        <div class="mb-4">
+                            <label for="country" class="form-label">
+                                Country
+                            </label>
+                            <input type="text" class="form-control" id="country" name="country"
+                                placeholder="Add country">
+                        </div>
+
+                        <!-- Submit -->
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-lg">
+                                Add Listing
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+```

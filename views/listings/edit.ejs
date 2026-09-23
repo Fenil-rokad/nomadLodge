@@ -1,31 +1,70 @@
 <% layout(`layouts/boilerplate`) %>
 
     <body>
-        <div class="container">
-            <h1>Edit Your Listing</h1>
-            <form action="/listings/<%= listing._id %>?_method=PUT" method="post">
-                <label for="title">Title : </label>
-                <input type="text" id="title" name="title" value="<%= listing.title %>" placeholder="Type title here..">
+        <div class="container mt-5 mb-5">
+            <div class="row justify-content-center">
 
-                <label for="description">Description :</label>
-                <textarea name="description" id="description"
-                    placeholder="Add description..."><%= listing.description %></textarea>
+                <div class="col-md-8 col-lg-6">
 
-                <label for="image">Image URL/Link :</label>
-                <input type="text" id="image" name="image" value="<%= listing.image %>"
-                    placeholder="Type image URL/Link">
+                    <div class="card shadow-sm border-0">
 
-                <label for="price">Price :</label>
-                <input type="number" id="price" name="price" value="<%= listing.price %>" placeholder="Add amount..">
+                        <div class="card-body p-4">
 
-                <label for="location">Location : </label>
-                <input type="text" id="location" name="location" value="<%= listing.location %>"
-                    placeholder="Add location">
+                            <h1 class="mb-4 text-center">Edit Your Listing</h1>
 
-                <label for="country">Country</label>
-                <input type="text" id="country" name="country" value="<%= listing.country %>" placeholder="Add country">
+                            <form action="/listings/<%= listing._id %>?_method=PUT" method="post">
 
-                <button type="submit">Update</button>
-            </form>
+                                <!-- title -->
+                                <div class="mb-3">
+                                    <label for="title" class="form-label">Title : </label>
+                                    <input type="text" id="title" class="form-control" name="title"
+                                        value="<%= listing.title %>" placeholder="Type title here..">
+                                </div>
+
+                                <!-- description -->
+                                <div class="mb-3">
+                                    <label for="description" class="form-label">Description :</label>
+                                    <textarea name="description" id="description" class="form-control"
+                                        placeholder="Add description..."><%= listing.description %></textarea>
+                                </div>
+
+                                <!-- image -->
+                                <div class="mb-3">
+                                    <label for="image" class="form-label">Image URL/Link :</label>
+                                    <input type="text" id="image" name="image" class="form-control"
+                                        value="<%= listing.image %>" placeholder="Type image URL/Link">
+                                </div>
+
+                                <!-- price -->
+                                <div class="mb-3">
+                                    <label for="price" class="form-label">Price :</label>
+                                    <input type="number" id="price" class="form-control" name="price"
+                                        value="<%= listing.price %>" placeholder="Add amount..">
+                                </div>
+
+                                <!-- location -->
+                                <div class="mb-3">
+                                    <label for="location" class="form-label">Location : </label>
+                                    <input type="text" id="location" class="form-control" name="location"
+                                        value="<%= listing.location %>" placeholder="Add location">
+                                </div>
+
+                                <!-- country -->
+                                <div class="mb-4">
+                                    <label for="country" class="form-label">Country</label>
+                                    <input type="text" id="country" name="country" class="form-control"
+                                        value="<%= listing.country %>" placeholder="Add country">
+                                </div>
+
+                                <!-- submit -->
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-lg">Update</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </body>

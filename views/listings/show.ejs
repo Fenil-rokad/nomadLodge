@@ -1,34 +1,53 @@
 <% layout('layouts/boilerplate') %>
 
     <body>
-        <div class="container">
-            <h1>
-                <%= listing.title %>
-            </h1>
-            <img src="<%= listing.image %>" alt="Loading..">
-            <ul>
-                <li>
-                    <p><b>Description</b>: <%= listing.description %>
-                    </p>
-                </li>
-                <li>
-                    <p><b>Price</b>: <%= price %>
-                    </p>
-                </li>
-                <li>
-                    <p><b>Location</b>: <%= listing.location %>
-                    </p>
-                </li>
-                <li>
-                    <p><b>Country</b>: <%= listing.country %>
-                    </p>
-                </li>
-            </ul>
-            <form action="/listings/<%= listing._id %>/edit" method="get">
-                <button type="submit">Edit</button>
-            </form>
-            <form action="/listings/<%= listing._id %>?_method=DELETE" method="post">
-                <button type="submit">delete</button>
-            </form>
+        <div class="container mb-5 mt-5">
+            <div class="row justify-content-center">
+                <h1 class="text-center mb-4">
+                    <%= listing.title %>
+                </h1>
+
+                <div class="card show-card">
+
+                    <img src="<%= listing.image %>" alt="Loading.." class="card-img-top shadow-lg mb-4">
+
+                    <div class="card-body text-center">
+
+                        <p class="card-text">
+                            <%= listing.description %>
+                        </p>
+
+                        <p>
+                            <b>Price:</b>
+                            <%= price %>
+                        </p>
+
+                        <p>
+                            <b>Location:</b>
+                            <%= listing.location %>
+                        </p>
+
+                        <p>
+                            <b>Country:</b>
+                            <%= listing.country %>
+                        </p>
+
+                        <div class="d-flex gap-3">
+                            <form action="/listings/<%= listing._id %>/edit" method="get" class="flex-fill">
+                                <button type="submit" class="btn w-100 ">
+                                    Edit
+                                </button>
+                            </form>
+
+                            <form action="/listings/<%= listing._id %>?_method=DELETE" method="post" class="flex-fill">
+                                <button type="submit" class="btn w-100">
+                                    Delete
+                                </button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
         </div>
     </body>

@@ -83,7 +83,7 @@ async function Main() {
       const id = req.params.id;
       const listing = req.body;
       const updatedListing = await Listing.findByIdAndUpdate(id, listing, {
-        returnDocument: true,
+        returnDocument: "after",
       });
       console.log(updatedListing);
       res.redirect(`/listings/${id}`);

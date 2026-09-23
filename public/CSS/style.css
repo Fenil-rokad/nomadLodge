@@ -9,6 +9,17 @@ body {
   flex: 1;
 }
 
+.btn {
+  background-color: rgb(189, 85, 121) !important;
+  color: white !important;
+}
+
+.btn:hover {
+  border: 2px solid rgb(96, 29, 73) !important;
+  background-color: white !important;
+  color: black !important;
+} 
+
 /* home page */
 
 h1 {
@@ -82,25 +93,22 @@ h1 {
   font-style: normal;
 }
 
-.card-body .btn {
-  background-color: rgb(189, 85, 121);
-  color: white;
-}
-
-.card-body .btn:hover {
-  border: 2px solid rgb(96, 29, 73);
-}
-
 .card img {
   border-radius: 20px;
   height: 20rem;
 }
 
 .card-link {
-  transition-duration: 0.5s;
+  transition-duration: 0.3s;
   transition-timing-function: ease-in;
 }
 
 .card-link:hover {
   transform: scale(1.07);
 }
+
+.show-card {
+  width: 30rem !important;
+}
+
+/* forms */
