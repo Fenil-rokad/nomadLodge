@@ -1,113 +1,116 @@
- <% layout(`layouts/boilerplate`) %>
+<% layout(`layouts/boilerplate`) %>
 
-<!--    <body>
-        <div class="container">
-            <h1>Add your listing</h1>
-            <form action="/listings" method="post">
-                <label for="title">Title : </label>
-                <input type="text" id="title" name="title" placeholder="Type title here..">
+    <div class="container mt-5 mb-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
 
-                <label for="description">Description :</label>
-                <textarea name="description" id="description" placeholder="Add description..."></textarea>
+                <div class="card shadow-sm border-0">
+                    <div class="card-body p-4">
 
-                <label for="image">Image URL/Link :</label>
-                <input type="text" id="image" name="image" placeholder="Type image URL/Link">
+                        <h1 class="mb-4 text-center">Add Your Listing</h1>
 
-                <label for="price">Price :</label>
-                <input type="number" id="price" name="price" placeholder="Add amount..">
+                        <form action="/listings" method="post" class="needs-validation" novalidate>
 
-                <label for="location">Location : </label>
-                <input type="text" id="location" name="location" placeholder="Add location">
-
-                <label for="country">Country</label>
-                <input type="text" id="country" name="country" placeholder="Add country">
-
-                <button type="submit">Add</button>
-            </form>
-        </div>
-    </body> -->
-
-<div class="container mt-5 mb-5">
-    <div class="row justify-content-center">
-        <div class="col-md-8 col-lg-6">
-
-            <div class="card shadow-sm border-0">
-                <div class="card-body p-4">
-
-                    <h1 class="mb-4 text-center">Add Your Listing</h1>
-
-                    <form action="/listings" method="post">
-
-                        <!-- Title -->
-                        <div class="mb-3">
-                            <label for="title" class="form-label">
-                                Title 
-                            </label>
-                            <input type="text" class="form-control" id="title" name="title"
-                                placeholder="Type title here.." required>
-                        </div>
-
-                        <!-- Description -->
-                        <div class="mb-3">
-                            <label for="description" class="form-label">
-                                Description
-                            </label>
-                            <textarea class="form-control" id="description" name="description" rows="4"
-                                placeholder="Add description..."></textarea>
-                        </div>
-
-                        <!-- Image -->
-                        <div class="mb-3">
-                            <label for="image" class="form-label">
-                                Image URL / Link
-                            </label>
-                            <input type="text" class="form-control" id="image" name="image"
-                                placeholder="https://example.com/image.jpg">
-                        </div>
-
-                        <!-- Price -->
-                        <div class="mb-3">
-                            <label for="price" class="form-label">
-                                Price
-                            </label>
-                            <div class="input-group">
-                                <span class="input-group-text">₹</span>
-                                <input type="number" class="form-control" id="price" name="price"
-                                    placeholder="Add amount.." required>
+                            <!-- Title -->
+                            <div class="mb-3">
+                                <label for="title" class="form-label">
+                                    Title
+                                </label>
+                                <input type="text" class="form-control" id="title" name="title"
+                                    placeholder="Type title here.." required>
+                                <div class="valid-feedback">
+                                    Valid 😊
+                                </div>
+                                <div class="invalid-feedback">
+                                    Title Required 😕
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- Location -->
-                        <div class="mb-3">
-                            <label for="location" class="form-label">
-                                Location
-                            </label>
-                            <input type="text" class="form-control" id="location" name="location"
-                                placeholder="Add location">
-                        </div>
+                            <!-- Description -->
+                            <div class="mb-3">
+                                <label for="description" class="form-label">
+                                    Description
+                                </label>
+                                <textarea class="form-control" id="description" name="description" rows="4"
+                                    placeholder="Add description..." required></textarea>
+                                    <div class="valid-feedback">
+                                        Valid 😊
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Description Required 😕
+                                    </div>
+                            </div>
 
-                        <!-- Country -->
-                        <div class="mb-4">
-                            <label for="country" class="form-label">
-                                Country
-                            </label>
-                            <input type="text" class="form-control" id="country" name="country"
-                                placeholder="Add country">
-                        </div>
+                            <!-- Image -->
+                            <div class="mb-3">
+                                <label for="image" class="form-label">
+                                    Image URL / Link
+                                </label>
+                                <input type="text" class="form-control" id="image" name="image"
+                                    placeholder="https://example.com/image.jpg">
+                            </div>
 
-                        <!-- Submit -->
-                        <div class="d-grid">
-                            <button type="submit" class="btn btn-lg">
-                                Add Listing
-                            </button>
-                        </div>
+                            <!-- Price -->
+                            <div class="mb-3">
+                                <label for="price" class="form-label">
+                                    Price
+                                </label>
+                                <div class="input-group">
+                                    <span class="input-group-text">₹</span>
+                                    <input type="number" class="form-control" id="price" name="price"
+                                        placeholder="Add amount.." required>
+                                    <div class="valid-feedback">
+                                    Valid 😊
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please Enter Price
+                                </div>
+                                </div>
+                            </div>
 
-                    </form>
+                            <!-- Location -->
+                            <div class="mb-3">
+                                <label for="location" class="form-label">
+                                    Location
+                                </label>
+                                <input type="text" class="form-control" id="location" name="location"
+                                    placeholder="Add location" required>
+                                <div class="valid-feedback">
+                                    Valid 😊
+                                </div>
+                                <div class="invalid-feedback">
+                                    Location Required 😕
+                                </div>
+                            </div>
 
+                            <!-- Country -->
+                            <div class="mb-4">
+                                <label for="country" class="form-label">
+                                    Country
+                                </label>
+                                <input type="text" class="form-control" id="country" name="country"
+                                    placeholder="Add country" required>
+                                <div class="valid-feedback">
+                                    Valid 😊
+                                </div>
+                                <div class="invalid-feedback">
+                                    Country Required 😕
+                                </div>
+                            </div>
+
+                            <!-- Submit -->
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-lg">
+                                    Add Listing
+                                </button>
+                            </div>
+
+                        </form>
+
+                    </div>
                 </div>
-            </div>
 
+            </div>
         </div>
     </div>
-</div>
-```
+    ```

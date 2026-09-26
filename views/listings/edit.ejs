@@ -12,48 +12,85 @@
 
                             <h1 class="mb-4 text-center">Edit Your Listing</h1>
 
-                            <form action="/listings/<%= listing._id %>?_method=PUT" method="post">
+                            <form action="/listings/<%= listing._id %>?_method=PUT" method="post"
+                                class="needs-validation" novalidate>
 
                                 <!-- title -->
                                 <div class="mb-3">
-                                    <label for="title" class="form-label">Title : </label>
+                                    <label for="title" class="form-label">Title </label>
                                     <input type="text" id="title" class="form-control" name="title"
-                                        value="<%= listing.title %>" placeholder="Type title here..">
+                                        value="<%= listing.title %>" placeholder="Type title here.." required>
+                                    <div class="valid-feedback">
+                                        Valid 😊
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Title Required 😕
+                                    </div>
                                 </div>
 
                                 <!-- description -->
                                 <div class="mb-3">
-                                    <label for="description" class="form-label">Description :</label>
+                                    <label for="description" class="form-label">Description</label>
                                     <textarea name="description" id="description" class="form-control"
-                                        placeholder="Add description..."><%= listing.description %></textarea>
+                                        placeholder="Add description..." required><%= listing.description %></textarea>
+                                    <div class="valid-feedback">
+                                        Valid 😊
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Description Required 😕
+                                    </div>
                                 </div>
 
                                 <!-- image -->
                                 <div class="mb-3">
-                                    <label for="image" class="form-label">Image URL/Link :</label>
+                                    <label for="image" class="form-label">Image URL/Link</label>
                                     <input type="text" id="image" name="image" class="form-control"
-                                        value="<%= listing.image %>" placeholder="Type image URL/Link">
+                                        value="<%= listing.image %>" placeholder="Type image URL/Link" required>
+                                    <div class="valid-feedback">
+                                        Valid 😊
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Image Required 😕
+                                    </div>
                                 </div>
 
                                 <!-- price -->
                                 <div class="mb-3">
-                                    <label for="price" class="form-label">Price :</label>
+                                    <label for="price" class="form-label">Price</label>
                                     <input type="number" id="price" class="form-control" name="price"
-                                        value="<%= listing.price %>" placeholder="Add amount..">
+                                        value="<%= listing.price %>" placeholder="Add amount.." required>
+                                    <div class="valid-feedback">
+                                        Valid 😊
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Please Enter Price 😕
+                                    </div>
                                 </div>
 
                                 <!-- location -->
                                 <div class="mb-3">
-                                    <label for="location" class="form-label">Location : </label>
+                                    <label for="location" class="form-label">Location</label>
                                     <input type="text" id="location" class="form-control" name="location"
-                                        value="<%= listing.location %>" placeholder="Add location">
+                                        value="<%= listing.location %>" placeholder="Add location" required>
+                                    <div class="valid-feedback">
+                                        Valid 😊
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Location Required 😕
+                                    </div>
                                 </div>
 
                                 <!-- country -->
                                 <div class="mb-4">
                                     <label for="country" class="form-label">Country</label>
                                     <input type="text" id="country" name="country" class="form-control"
-                                        value="<%= listing.country %>" placeholder="Add country">
+                                        value="<%= listing.country %>" placeholder="Add country" required>
+                                    <div class="valid-feedback">
+                                        Valid 😊
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Country Required 😕
+                                    </div>
                                 </div>
 
                                 <!-- submit -->
