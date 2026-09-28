@@ -9,7 +9,7 @@ const listingSchema = new Schema({
   },
   description: {
     type: String,
-    required: true
+    required: true,
   },
   image: {
     type: String,
@@ -28,10 +28,12 @@ const listingSchema = new Schema({
   location: {
     type: String,
     trim: true,
+    required: true,
   },
   country: {
     type: String,
     trim: true,
+    required: true,
   },
 });
 
