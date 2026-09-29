@@ -7,7 +7,7 @@ import { fileURLToPath } from "url";
 import methodOverride from "method-override";
 import ejsMate from "ejs-mate";
 import { AppError } from "./utils/appError.js";
-import Joi from "joi";
+import { listingSchema } from "./validateSchema.js";
 
 dotenv.config();
 
@@ -41,6 +41,16 @@ async function Main() {
 
 Main();
 
+//server side validation middleware
+const validateListing = (req, res, next) => {
+  const { error } = listingSchema.validate(req.body);
+
+  if (error) {
+    return next(new AppError(error.details[0].message, 400));
+  }
+  next();
+};
+
 //root path
 app.get("/", (req, res) => {
   res.render(`home/home`);
@@ -64,13 +74,8 @@ app.get("/listings/new", (req, res) => {
 });
 
 //create route
-app.post("/listings", async (req, res) => {
+app.post("/listings", validateListing, async (req, res) => {
   const listing = req.body;
-
-  if (!listing) {
-    throw new AppError("Bad Request. Please send valid data..", 400);
-  }
-
   const newListing = await Listing.create(listing);
   console.log(newListing);
   res.redirect("/listings");
@@ -106,7 +111,7 @@ app.get("/listings/:id/edit", async (req, res) => {
 });
 
 //update route
-app.put("/listings/:id", async (req, res) => {
+app.put("/listings/:id",validateListing, async (req, res) => {
   const id = req.params.id;
   const listing = req.body;
   const updatedListing = await Listing.findByIdAndUpdate(id, listing, {
@@ -130,12 +135,13 @@ app.all("/{*splat}", (req, res, next) => {
 
 //Error handling middleware
 app.use((err, req, res, next) => {
+  
   // Mongoose invalid ObjectId
   if (err.name === "CastError") {
     err = new AppError("Invalid listing ID", 400);
   }
 
-  // Mongoose invalid ObjectId
+  // Mongoose validation Error
   if (err.name === "ValidationError") {
     const message = Object.values(err.errors)
       .map((error) => error.message)
