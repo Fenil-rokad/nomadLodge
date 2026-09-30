@@ -1,5 +1,6 @@
 import Joi from "joi";
 
+//validating req.body object
 const listingSchema = Joi.object({
     title: Joi.string().trim().required(),
     description: Joi.string().trim().required(),
