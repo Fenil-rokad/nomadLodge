@@ -35,7 +35,7 @@ async function Main() {
     await mongoose.connect(process.env.MONGO_URL);
     console.log(`DataBase connected Succesfully......`);
   } catch (err) {
-    console.error(`Connection failed.. : ${err}`);
+    console.error(`Connection failed.. : ${err.message}`);
   }
 }
 
@@ -43,11 +43,17 @@ Main();
 
 //server side validation middleware
 const validateListing = (req, res, next) => {
-  const { error } = listingSchema.validate(req.body);
+  const { error, value } = listingSchema.validate(req.body, {
+    abortEarly: false,
+    stripUnknown: true,
+  });
 
   if (error) {
-    return next(new AppError(error.details[0].message, 400));
+    const message = error.details.map((detail) => detail.message).join(", ");
+    return next(new AppError(message, 400));
   }
+
+  req.validateListing = value;
   next();
 };
 
@@ -59,12 +65,12 @@ app.get("/", (req, res) => {
 //show all listings
 app.get("/listings", async (req, res) => {
   const allListings = await Listing.find();
-
-  if (!allListings) {
-    throw new AppError("Listings not found...", 404);
+  
+  if(allListings.length === 0){
+    return res.render(`listings/noListings`);
   }
 
-  // console.log(allListings);
+  console.log(allListings);
   res.render("listings/allListings", { allListings });
 });
 
@@ -75,7 +81,7 @@ app.get("/listings/new", (req, res) => {
 
 //create route
 app.post("/listings", validateListing, async (req, res) => {
-  const listing = req.body;
+  const listing = req.validateListing;
   const newListing = await Listing.create(listing);
   console.log(newListing);
   res.redirect("/listings");
@@ -87,7 +93,7 @@ app.get("/listings/:id", async (req, res) => {
   const listing = await Listing.findById(id);
 
   if (!listing) {
-    throw new AppError("Listing not found...", 500);
+    throw new AppError("Listing not found...", 404);
   }
 
   const price = listing.price.toLocaleString("en-IN", {
@@ -104,20 +110,24 @@ app.get("/listings/:id/edit", async (req, res) => {
   const listing = await Listing.findById(id);
 
   if (!listing) {
-    throw new AppError("Listing not found...", 500);
+    throw new AppError("Listing not found...", 404);
   }
 
   res.render(`listings/edit`, { listing });
 });
 
 //update route
-app.put("/listings/:id",validateListing, async (req, res) => {
+app.put("/listings/:id", validateListing, async (req, res) => {
   const id = req.params.id;
-  const listing = req.body;
+  const listing = req.validateListing;
   const updatedListing = await Listing.findByIdAndUpdate(id, listing, {
+    runValidators: true,
     returnDocument: "after",
   });
-  console.log(updatedListing);
+  // console.log(updatedListing);
+  if (!updatedListing) {
+    throw new AppError("Listing not found..", 404);
+  }
   res.redirect(`/listings/${id}`);
 });
 
@@ -125,7 +135,10 @@ app.put("/listings/:id",validateListing, async (req, res) => {
 app.delete("/listings/:id", async (req, res) => {
   const id = req.params.id;
   const deletedListing = await Listing.findByIdAndDelete(id);
-  console.log(deletedListing);
+  // console.log(deletedListing);
+  if (!deletedListing) {
+    throw new AppError("Listing not found...", 404);
+  }
   res.redirect(`/listings`);
 });
 
@@ -135,7 +148,6 @@ app.all("/{*splat}", (req, res, next) => {
 
 //Error handling middleware
 app.use((err, req, res, next) => {
-  
   // Mongoose invalid ObjectId
   if (err.name === "CastError") {
     err = new AppError("Invalid listing ID", 400);
