@@ -70,7 +70,7 @@ app.get("/listings", async (req, res) => {
     return res.render(`listings/noListings`);
   }
 
-  console.log(allListings);
+  // console.log(allListings);
   res.render("listings/allListings", { allListings });
 });
 
