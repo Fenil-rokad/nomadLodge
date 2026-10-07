@@ -116,8 +116,8 @@ app.get("/listings/:id", async (req, res) => {
   const reviews = await Review.find({
     listing: id
   });
-  console.log(reviews);
-  
+  // console.log(reviews);
+
   res.render("listings/show", { listing, reviews });
 });
 
