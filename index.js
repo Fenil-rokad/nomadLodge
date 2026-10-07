@@ -8,7 +8,7 @@ import { fileURLToPath } from "url";
 import methodOverride from "method-override";
 import ejsMate from "ejs-mate";
 import { AppError } from "./utils/appError.js";
-import { listingSchema } from "./validateSchema.js";
+import { listingSchema, reviewSchema } from "./public/JS/validateSchema.js";
 
 dotenv.config();
 
@@ -42,7 +42,7 @@ async function Main() {
 
 Main();
 
-//server side validation middleware
+//server side validation middleware for listings
 const validateListing = (req, res, next) => {
   const { error, value } = listingSchema.validate(req.body, {
     abortEarly: false,
@@ -55,6 +55,22 @@ const validateListing = (req, res, next) => {
   }
 
   req.validateListing = value;
+  next();
+};
+
+//server side validation middleware for reviews
+const validateReview = (req, res, next) => {
+  const { error, value } = reviewSchema.validate(req.body, {
+    abortEarly: false,
+    stripUnknown: true,
+  });
+
+  if (error) {
+    const message = error.details.map((detail) => detail.message).join(", ");
+    return next(new AppError(message, 400));
+  }
+
+  req.validateReview = value;
   next();
 };
 
@@ -146,13 +162,12 @@ app.delete("/listings/:id", async (req, res) => {
 //reviews
 
 //adding reviews
-app.post("/listings/:id/review", async (req, res) => {
-  const reviewData = {...req.body, listing : req.params.id}; 
+app.post("/listings/:id/review", validateReview, async (req, res) => {
+  const reviewData = { ...req.validateReview, listing: req.params.id };
   const review = await Review.create(reviewData);
   console.log(review);
   res.redirect(`/listings/${req.params.id}`);
 });
-
 
 // page not found middleware
 app.all("/{*splat}", (req, res, next) => {

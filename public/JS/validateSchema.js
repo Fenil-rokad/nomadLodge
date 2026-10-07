@@ -10,4 +10,9 @@ const listingSchema = Joi.object({
     country: Joi.string().trim().required(),
 });
 
-export { listingSchema };
+const reviewSchema = Joi.object({
+    comment: Joi.string().trim().required(),
+    rating: Joi.number().min(1).max(5).required()
+});
+
+export { listingSchema, reviewSchema };

@@ -56,12 +56,16 @@
                 <div class="col-md-8 col-lg-6">
                     <div class="card shadow-lg border-0">
                         <div class="card-body p-4">
-                            <form action="/listings/<%= listing._id %>/review" method="post">
+                            <form action="/listings/<%= listing._id %>/review" method="post" class="needs-validation"
+                                novalidate>
                                 <div class="mb-3">
                                     <div class="form-floating">
-                                        <textarea class="form-control" placeholder="Leave a review here"
-                                            id="comment" style="height: 100px" name="comment" required ></textarea>
+                                        <textarea class="form-control" placeholder="Leave a review here" id="comment"
+                                            style="height: 100px" name="comment" required></textarea>
                                         <label for="comment">Comments</label>
+                                        <div class="invalid-feedback">
+                                            Please write a review before hitting submit..
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="mb-3">
