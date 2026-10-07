@@ -113,12 +113,12 @@ app.get("/listings/:id", async (req, res) => {
     throw new AppError("Listing not found...", 404);
   }
 
-  const price = listing.price.toLocaleString("en-IN", {
-    style: "currency",
-    currency: "INR",
-    maximumFractionDigits: 2,
+  const reviews = await Review.find({
+    listing: id
   });
-  res.render("listings/show", { listing, price });
+  console.log(reviews);
+  
+  res.render("listings/show", { listing, reviews });
 });
 
 //edit form route
