@@ -147,7 +147,10 @@ app.delete("/listings/:id", async (req, res) => {
 
 //adding reviews
 app.post("/listings/:id/review", async (req, res) => {
-  
+  const reviewData = {...req.body, listing : req.params.id}; 
+  const review = await Review.create(reviewData);
+  console.log(review);
+  res.redirect(`/listings/${req.params.id}`);
 });
 
 
