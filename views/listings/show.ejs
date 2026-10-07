@@ -45,9 +45,37 @@
                                 </button>
                             </form>
                         </div>
-
                     </div>
                 </div>
+
+                <hr>
+
+                <h2 class="text-center mb-4">
+                    Add review
+                </h2>
+                <div class="col-md-8 col-lg-6">
+                    <div class="card shadow-lg border-0">
+                        <div class="card-body p-4">
+                            <form action="listings/<%= listing._id %>/review" method="post">
+                                <div class="mb-3">
+                                    <div class="form-floating">
+                                        <textarea class="form-control" placeholder="Leave a review here"
+                                            id="comment" style="height: 100px" name="comment" required ></textarea>
+                                        <label for="comment">Comments</label>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="rating">Rating</label>
+                                    <input type="range" class="form-range" id="rating" min="1" max="5" name="rating">
+                                </div>
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </body>

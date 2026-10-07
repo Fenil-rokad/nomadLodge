@@ -12,6 +12,7 @@ body {
 .btn {
   background-color: rgb(189, 85, 121) !important;
   color: white !important;
+  border: none !important;
 }
 
 .btn:hover {

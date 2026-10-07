@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import { Listing } from "./models/listing.js";
+import { Review } from "./models/review.js";
 import path from "path";
 import { fileURLToPath } from "url";
 import methodOverride from "method-override";
@@ -65,8 +66,8 @@ app.get("/", (req, res) => {
 //show all listings
 app.get("/listings", async (req, res) => {
   const allListings = await Listing.find();
-  
-  if(allListings.length === 0){
+
+  if (allListings.length === 0) {
     return res.render(`listings/noListings`);
   }
 
@@ -142,6 +143,15 @@ app.delete("/listings/:id", async (req, res) => {
   res.redirect(`/listings`);
 });
 
+//reviews
+
+//adding reviews
+app.post("/listings/:id/review", async (req, res) => {
+  
+});
+
+
+// page not found middleware
 app.all("/{*splat}", (req, res, next) => {
   next(new AppError("Page not found...", 404));
 });
