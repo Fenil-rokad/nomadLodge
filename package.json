@@ -12,6 +12,7 @@
   "license": "ISC",
   "description": "A Smaller version of airbnb",
   "dependencies": {
+    "bootstrap": "^5.3.8",
     "dotenv": "^18.0.0",
     "ejs": "^6.0.1",
     "ejs-mate": "^4.0.0",
