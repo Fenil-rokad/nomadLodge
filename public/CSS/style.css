@@ -45,8 +45,8 @@ h1 {
   font-style: normal;
 }
 
-.fa-key {
-  color: rgb(96, 29, 73);
+.fa-house-flag {
+  color: rgb(96, 29, 73) !important;
 }
 
 .nav-link {
@@ -85,7 +85,16 @@ h1 {
 
 /* cards */
 
-.card {
+.review-card {
+  width: 100%;
+  font-family: "Quicksand", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  border: 5px solid rgb(96, 29, 73)
+}
+
+.allListings-card{
   border: none !important;
   width: 100% !important;
   font-family: "Quicksand", sans-serif;
@@ -110,6 +119,11 @@ h1 {
 
 .show-card {
   width: 30rem !important;
+  border: none !important;
+  font-family: "Quicksand", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
 }
 
 /* forms */

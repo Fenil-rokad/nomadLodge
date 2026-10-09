@@ -169,6 +169,16 @@ app.post("/listings/:id/review", validateReview, async (req, res) => {
   res.redirect(`/listings/${req.params.id}`);
 });
 
+//deleting review
+app.delete("/listings/:id/review/:review_id", async (req, res) => {
+  const id = req.params.review_id;
+  const deletedReview = await Review.findByIdAndDelete(id);
+  console.log(deletedReview);
+  res.redirect(`/listings/${req.params.id}`);
+});
+
+
+
 // page not found middleware
 app.all("/{*splat}", (req, res, next) => {
   next(new AppError("Page not found...", 404));
