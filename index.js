@@ -35,8 +35,13 @@ async function Main() {
     //Establishing a connection
     await mongoose.connect(process.env.MONGO_URL);
     console.log(`DataBase connected Succesfully......`);
+
+    app.listen(port, () => {
+      console.log(`App is listening on port localhost:${port}`);
+    });
   } catch (err) {
-    console.error(`Connection failed.. : ${err.message}`);
+    console.error("Failed to start application:", err.message);
+    process.exitCode = 1;
   }
 }
 
@@ -114,7 +119,7 @@ app.get("/listings/:id", async (req, res) => {
   }
 
   const reviews = await Review.find({
-    listing: id
+    listing: id,
   });
   // console.log(reviews);
 
@@ -171,13 +176,19 @@ app.post("/listings/:id/review", validateReview, async (req, res) => {
 
 //deleting review
 app.delete("/listings/:id/review/:review_id", async (req, res) => {
-  const id = req.params.review_id;
-  const deletedReview = await Review.findByIdAndDelete(id);
+  const { id, review_id } = req.params;
+  const deletedReview = await Review.findOneAndDelete({
+    _id: review_id,
+    listing: id,
+  });
+
+  if (!deletedReview) {
+    throw new AppError("Review not found.", 404);
+  }
+
   console.log(deletedReview);
-  res.redirect(`/listings/${req.params.id}`);
+  res.redirect(`/listings/${id}`);
 });
-
-
 
 // page not found middleware
 app.all("/{*splat}", (req, res, next) => {
@@ -186,6 +197,7 @@ app.all("/{*splat}", (req, res, next) => {
 
 //Error handling middleware
 app.use((err, req, res, next) => {
+
   // Mongoose invalid ObjectId
   if (err.name === "CastError") {
     err = new AppError("Invalid listing ID", 400);
@@ -210,8 +222,4 @@ app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
   const message = err.message || "Internal Server Error...";
   res.status(statusCode).render(`errors/error`, { statusCode, message });
-});
-
-app.listen(port, () => {
-  console.log(`App is listening on port localhost:${port}`);
 });

@@ -39,8 +39,7 @@ const listingSchema = new Schema({
 });
 
 //pre middlwware for deleting all reviews while deleting listing
-listingSchema.pre(`findOneAndDelete`, async function() {
-  const listing = await this.model.findOne(this.getFilter());
+listingSchema.post(`findOneAndDelete`, async function(listing) {
   if (listing) {
     await Review.deleteMany({
       listing: listing._id,
