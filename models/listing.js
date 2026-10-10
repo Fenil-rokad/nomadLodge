@@ -1,5 +1,6 @@
 import mongoose, { set } from "mongoose";
 import { Schema } from "mongoose";
+import { Review } from "./review.js";
 
 const listingSchema = new Schema({
   title: {
@@ -35,6 +36,16 @@ const listingSchema = new Schema({
     trim: true,
     required: true,
   },
+});
+
+//pre middlwware for deleting all reviews while deleting listing
+listingSchema.pre(`findOneAndDelete`, async function() {
+  const listing = await this.model.findOne(this.getFilter());
+  if (listing) {
+    await Review.deleteMany({
+      listing: listing._id,
+    });
+  }
 });
 
 export const Listing = mongoose.model("Listing", listingSchema);
