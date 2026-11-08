@@ -25,7 +25,7 @@ app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(
-  express.urlencoded({  
+  express.urlencoded({
     extended: true,
   }),
 );
@@ -39,7 +39,7 @@ app.get("/", (req, res) => {
 
 // Register routers
 app.use("/listings", listingRouter);
-app.use("/listings", reviewRouter);
+app.use("/listings/:id/review", reviewRouter);
 
 // Page not found
 app.all("/{*splat}", (req, res, next) => {

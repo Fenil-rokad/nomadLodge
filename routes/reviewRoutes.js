@@ -7,23 +7,23 @@ import { Review } from "../models/review.js";
 import { AppError } from "../utils/appError.js";
 
 
-const router = express.Router();
+const router = express.Router({mergeParams: true});
 
 //add a review
-router.post("/:id/review", validateReview, async (req, res) => {
+router.post("/", validateReview, async (req, res) => {
   const { id } = req.params;
   const listing = await Listing.findById(id);
   if (!listing) {
     throw new AppError("Listing not found.", 404);
   }
-  const reviewData = { ...req.validateReview, listing: req.params.id };
+  const reviewData = { ...req.validateReview, listing: id };
   const review = await Review.create(reviewData);
   console.log(review);
   res.redirect(`/listings/${req.params.id}`);
 });
 
 //deleting review
-router.delete("/:id/review/:review_id", async (req, res) => {
+router.delete("/:review_id", async (req, res) => {
   const { id, review_id } = req.params;
   const deletedReview = await Review.findOneAndDelete({
     _id: review_id,
