@@ -28,7 +28,7 @@ router.get("/new", (req, res) => {
 });
 
 //create route
-router.post("/listings", validateListing, async (req, res) => {
+router.post("/", validateListing, async (req, res) => {
   const listing = req.validateListing;
   const newListing = await Listing.create(listing);
   console.log(newListing);
